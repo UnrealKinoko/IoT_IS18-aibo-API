@@ -1,1 +1,2 @@
-token: "YOUR_TOKEN"
+# YOUR_API_TOKENを取得したAPIトークンに置き換える
+token: "YOUR_API_TOKEN"
