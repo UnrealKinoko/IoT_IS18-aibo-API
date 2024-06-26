@@ -8,14 +8,14 @@ headers = {"Authorization": f"Bearer {token}",} # ヘッダーの設定 Authoriz
 
 def POST(urlSuf,json): # POSTリクエストを送る関数 urlSufはURLの後ろに追加する文字列、jsonは送信するjson
     resp= requests.post(url+urlSuf, headers=headers, json=json) # POSTリクエストを送信
-    if resp.status_code != 200: # ステータスコードが200以外の時
-        raise Exception(f"Status code {resp.status_code}") # 例外を出力
+    # if resp.status_code != 200: # ステータスコードが200以外の時
+        # raise Exception(f"Status code {resp.status_code}") # 例外を出力
     return resp # レスポンスを返す
 
 def GET(urlSuf): # GETリクエストを送る関数 urlSufはURLの後ろに追加する文字列
     resp= requests.get(url+urlSuf, headers=headers) # GETリクエストを送信
-    if resp.status_code != 200: # ステータスコードが200以外の時
-        raise Exception(f"Status code {resp.status_code}") # 例外を出力
+    # if resp.status_code != 200: # ステータスコードが200以外の時
+        # raise Exception(f"Status code {resp.status_code}") # 例外を出力
     return resp # レスポンスを返す
 
 
