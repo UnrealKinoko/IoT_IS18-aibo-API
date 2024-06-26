@@ -57,4 +57,3 @@ def GET(urlSuf): # GETリクエストを送る関数 urlSufはURLの後ろに追
 deviceId = GET("/v1/devices").json()["devices"][0]["deviceId"] # デバイスIDを取得 今回は一つのデバイスのみを想定
 
 resp = POST(f"/v1/devices/{deviceId}/capabilities/set_mode/execute", {"arguments":{"ModeName":"DEVELOPMENT"}}) # 指示待ちモードに設定
-# print(f"[{resp.json()["status"]}] SetMode:DEVELOPMENT")
