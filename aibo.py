@@ -2,7 +2,7 @@ import requests, yaml, time # ライブラリのインポート requestsはAPI�
 
 url ="https://public.api.aibo.com" # aiboのAPIのURL
 with open("config.yaml") as f: # config.yamlを読み込む
-    token = yaml.load(f, Loader=yaml.SafeLoader)["token"] # config.yamlのtokenを取得
+    token = yaml.load(f, Loader=yaml.SafeLoader)["kicker"]["token"] # config.yamlのtokenを取得
     print("token loaded")
 
 headers = {"Authorization": f"Bearer {token}",} # ヘッダーの設定 AuthorizationにBearer +APIトークンを設定
@@ -57,3 +57,11 @@ def GET(urlSuf): # GETリクエストを送る関数 urlSufはURLの後ろに追
 deviceId = GET("/v1/devices").json()["devices"][0]["deviceId"] # デバイスIDを取得 今回は一つのデバイスのみを想定
 
 resp = POST(f"/v1/devices/{deviceId}/capabilities/set_mode/execute", {"arguments":{"ModeName":"DEVELOPMENT"}}) # 指示待ちモードに設定
+while GET(f"/v1/executions/{resp.json()["executionId"]}").json()["status"] != "SUCCEEDED": # 完了するまで待機
+    print(GET(f"/v1/executions/{resp.json()["executionId"]}").json()["status"])
+    time.sleep(5)
+    # resp = GET(f"/v1/devices/{deviceId}/capabilities/set_mode/status/{resp.json()['taskId']}")
+
+POST(f"/v1/devices/{deviceId}/capabilities/approach_object/execute", {"arguments":{"TargetType":"pinkball"}}) # 
+
+POST(f"/v1/devices/{deviceId}/capabilities/kick_object/execute",{"arguments":{"TargetType":"pinkball","KickMotion":"kick"}} ) # 

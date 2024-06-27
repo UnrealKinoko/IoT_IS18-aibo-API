@@ -1,3 +1,7 @@
 # これは設定ファイル
 # YOUR_API_TOKENを取得したAPIトークンに置き換える
-token: "YOUR_API_TOKEN"
+kicker:
+  token: "YOUR_API_TOKEN"
+
+keeper:
+  token: "YOUR_API_TOKEN"
