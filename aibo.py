@@ -93,13 +93,15 @@ match diceB:
     case 2:
         respB= POST(headersB,f"/v1/devices/{deviceIdB}/capabilities/move_sideways/execute",{"arguments":{"WalkSpeed":1,"WalkDistance":0.2}})
 
-while GET(headers,f"/v1/executions/{respA.json()["executionId"]}").json()["status"] != "SUCCEEDED": # 完了するまで待機
-    print(GET(headers,f"/v1/executions/{respA.json()["executionId"]}").json()["status"])
-    time.sleep(1)
+if diceA != 1:
+    while GET(headers,f"/v1/executions/{respA.json()["executionId"]}").json()["status"] != "SUCCEEDED": # 完了するまで待機
+        print(GET(headers,f"/v1/executions/{respA.json()["executionId"]}").json()["status"])
+        time.sleep(1)
 
-while GET(headersB,f"/v1/executions/{respB.json()["executionId"]}").json()["status"] != "SUCCEEDED": # 完了するまで待機
-    print(GET(headersB,f"/v1/executions/{respB.json()["executionId"]}").json()["status"])
-    time.sleep(1)
+if diceB != 1:
+    while GET(headersB,f"/v1/executions/{respB.json()["executionId"]}").json()["status"] != "SUCCEEDED": # 完了するまで待機
+        print(GET(headersB,f"/v1/executions/{respB.json()["executionId"]}").json()["status"])
+        time.sleep(1)
 
 POST(headers,f"/v1/devices/{deviceId}/capabilities/approach_object/execute", {"arguments":{"TargetType":"pinkball"}}) # 
 
